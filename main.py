@@ -33,19 +33,13 @@ class LocationRequest(BaseModel):
 
 @app.post("/getAll")
 def getAll(location : LocationRequest):
-    # print(f'Latitude: {location.latitude}')
-    # print(f'Longitude: {location.longitude}')
     lat = float(location.latitude)
     lon = float(location.longitude)
     response = requests.get(f'{maps_base_url}latlng={lat},{lon}&key={MAPS_API_KEY}', headers=headers)
     data = response.json()
 
-    # city_name = extract_region_long_name(data)
-    # name = {
-    #     "city": city_name
-    # }
-
     return data
+
 @app.post("/getcity")
 def get_city(location : LocationRequest):
     print(f'Latitude: {location.latitude}')
@@ -60,8 +54,6 @@ def get_city(location : LocationRequest):
     }
 
     return name
-
-
 
 
 def extract_region_long_name(data):
